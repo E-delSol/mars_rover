@@ -1,23 +1,26 @@
 package com.pecado.del_sol_mars_rover.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "obstacle")
 public class Obstacle {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @Column(name = "obstacle_id")
     private Long id;
-    private int x;
-    private int y;
-
-    public Obstacle(Long id, int x, int y) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-    }
+    @Column(name = "x_coordinate", nullable = false)
+    private Integer x;
+    @Column(name = "y_coordinate", nullable = false)
+    private Integer y;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "map_id", nullable = false)
+    private Map map;
 
 }
