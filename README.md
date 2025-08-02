@@ -41,7 +41,7 @@ Make sure you have installed:
 
 ```bash
 git clone https://github.com/E-delSol/mars_rover.git
-cd del-sol-mars-rover
+cd mars_rover
 ```
 
 ### 3. Configure the Database
