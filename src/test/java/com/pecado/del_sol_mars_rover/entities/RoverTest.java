@@ -1,243 +1,69 @@
 package com.pecado.del_sol_mars_rover.entities;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoverTest {
-    // Test cases for forward movement
-    @Test
-    void moveForward_whenFacingNorth_incrementsY() {
+
+    // This test class contains parameterized tests for the Rover entity.
+    @ParameterizedTest
+    @CsvSource({
+            "N, f, 0, 1",
+            "N, b, 0, -1",
+            "E, f, 1, 0",
+            "E, b, -1, 0",
+            "S, f, 0, -1",
+            "S, b, 0, 1",
+            "W, f, -1, 0",
+            "W, b, 1, 0"
+    })
+    void moveRover(Direction direction, char command, int expectedX, int expectedY) {
         // Given
         Rover rover = new Rover();
         rover.setX(0);
         rover.setY(0);
-        rover.setDirection(Direction.N);
+        rover.setDirection(direction);
 
         // When
-        rover.moveForward();
+        if (command == 'f') {
+            rover.moveForward();
+        } else {
+            rover.moveBackward();
+        }
 
         // Then
-        assert rover.getX() == 0;
-        assert rover.getY() == 1;
+        assertEquals(expectedX, rover.getX());
+        assertEquals(expectedY, rover.getY());
     }
 
-    @Test
-    void moveForward_whenFacingEast_incrementsX() {
+    // This test class contains parameterized tests for the Rover entity.
+    @ParameterizedTest
+    @CsvSource({
+            "N, L, W",
+            "E, L, N",
+            "S, L, E",
+            "W, L, S",
+            "N, R, E",
+            "E, R, S",
+            "S, R, W",
+            "W, R, N"
+    })
+    void turnRover(Direction startDirection, char turn, Direction expectedDirection) {
         // Given
         Rover rover = new Rover();
-        rover.setX(0);
-        rover.setY(0);
-        rover.setDirection(Direction.E);
+        rover.setDirection(startDirection);
 
         // When
-        rover.moveForward();
+        if (turn == 'L') {
+            rover.turnLeft();
+        } else {
+            rover.turnRight();
+        }
 
         // Then
-        assert rover.getX() == 1;
-        assert rover.getY() == 0;
+        assertEquals(expectedDirection, rover.getDirection());
     }
-
-    @Test
-    void moveForward_whenFacingSouth_decrementsY() {
-        // Given
-        Rover rover = new Rover();
-        rover.setX(0);
-        rover.setY(0);
-        rover.setDirection(Direction.S);
-
-        // When
-        rover.moveForward();
-
-        // Then
-        assert rover.getX() == 0;
-        assert rover.getY() == -1;
-    }
-
-    @Test
-    void moveForward_whenFacingWest_decrementsX() {
-        // Given
-        Rover rover = new Rover();
-        rover.setX(0);
-        rover.setY(0);
-        rover.setDirection(Direction.W);
-
-        // When
-        rover.moveForward();
-
-        // Then
-        assert rover.getX() == -1;
-        assert rover.getY() == 0;
-    }
-
-    // Test cases for backward movement
-    @Test
-    void moveBackward_whenFacingNorth_decrementsY() {
-        // Given
-        Rover rover = new Rover();
-        rover.setX(0);
-        rover.setY(0);
-        rover.setDirection(Direction.N);
-
-        // When
-        rover.moveBackward();
-
-        // Then
-        assert rover.getX() == 0;
-        assert rover.getY() == -1;
-    }
-
-    @Test
-    void moveBackward_whenFacingEast_decrementsX() {
-        // Given
-        Rover rover = new Rover();
-        rover.setX(0);
-        rover.setY(0);
-        rover.setDirection(Direction.E);
-
-        // When
-        rover.moveBackward();
-
-        // Then
-        assert rover.getX() == -1;
-        assert rover.getY() == 0;
-    }
-
-    @Test
-    void moveBackward_whenFacingSouth_incrementsY() {
-        // Given
-        Rover rover = new Rover();
-        rover.setX(0);
-        rover.setY(0);
-        rover.setDirection(Direction.S);
-
-        // When
-        rover.moveBackward();
-
-        // Then
-        assert rover.getX() == 0;
-        assert rover.getY() == 1;
-    }
-
-    @Test
-    void moveBackward_whenFacingWest_incrementsX() {
-        // Given
-        Rover rover = new Rover();
-        rover.setX(0);
-        rover.setY(0);
-        rover.setDirection(Direction.W);
-
-        // When
-        rover.moveBackward();
-
-        // Then
-        assert rover.getX() == 1;
-        assert rover.getY() == 0;
-    }
-
-    // Test cases for turning left
-    @Test
-    void turnLeft_whenFacingNorth_changesDirectionToWest() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.N);
-
-        // When
-        rover.turnLeft();
-
-        // Then
-        assert rover.getDirection() == Direction.W;
-    }
-
-    @Test
-    void turnLeft_whenFacingEast_changesDirectionToNorth() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.E);
-
-        // When
-        rover.turnLeft();
-
-        // Then
-        assert rover.getDirection() == Direction.N;
-    }
-
-    @Test
-    void turnLeft_whenFacingSouth_changesDirectionToEast() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.S);
-
-        // When
-        rover.turnLeft();
-
-        // Then
-        assert rover.getDirection() == Direction.E;
-    }
-
-    @Test
-    void turnLeft_whenFacingWest_changesDirectionToSouth() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.W);
-
-        // When
-        rover.turnLeft();
-
-        // Then
-        assert rover.getDirection() == Direction.S;
-    }
-
-    // Test cases for turning right
-    @Test
-    void turnRight_whenFacingNorth_changesDirectionToEast() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.N);
-
-        // When
-        rover.turnRight();
-
-        // Then
-        assert rover.getDirection() == Direction.E;
-    }
-
-    @Test
-    void turnRight_whenFacingEast_changesDirectionToSouth() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.E);
-
-        // When
-        rover.turnRight();
-
-        // Then
-        assert rover.getDirection() == Direction.S;
-    }
-
-    @Test
-    void turnRight_whenFacingSouth_changesDirectionToWest() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.S);
-
-        // When
-        rover.turnRight();
-
-        // Then
-        assert rover.getDirection() == Direction.W;
-    }
-
-    @Test
-    void turnRight_whenFacingWest_changesDirectionToNorth() {
-        // Given
-        Rover rover = new Rover();
-        rover.setDirection(Direction.W);
-
-        // When
-        rover.turnRight();
-
-        // Then
-        assert rover.getDirection() == Direction.N;
-    }
-
 
 }

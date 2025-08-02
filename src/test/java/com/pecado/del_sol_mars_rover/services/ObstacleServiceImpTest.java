@@ -3,7 +3,6 @@ package com.pecado.del_sol_mars_rover.services;
 import com.pecado.del_sol_mars_rover.dto.ObstacleDto;
 import com.pecado.del_sol_mars_rover.dto.ObstacleResponseDto;
 import com.pecado.del_sol_mars_rover.entities.Map;
-import com.pecado.del_sol_mars_rover.entities.Obstacle;
 import com.pecado.del_sol_mars_rover.repository.MapRepository;
 import com.pecado.del_sol_mars_rover.repository.ObstacleRepository;
 import org.junit.jupiter.api.Test;
