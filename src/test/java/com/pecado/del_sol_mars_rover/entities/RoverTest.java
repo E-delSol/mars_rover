@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoverTest {
 
-    // This test class contains parameterized tests for the Rover entity.
-    @ParameterizedTest
+    // Parameterized tests for move methods of the Rover entity.
     @CsvSource({
             "N, f, 0, 1",
             "N, b, 0, -1",
@@ -38,7 +37,7 @@ public class RoverTest {
         assertEquals(expectedY, rover.getY());
     }
 
-    // This test class contains parameterized tests for the Rover entity.
+    // Parameterized tests for turning methods of the Rover entity.
     @ParameterizedTest
     @CsvSource({
             "N, L, W",
