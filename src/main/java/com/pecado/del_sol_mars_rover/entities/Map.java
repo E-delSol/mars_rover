@@ -1,5 +1,6 @@
 package com.pecado.del_sol_mars_rover.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,10 +24,12 @@ public class Map {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "map_id")
+    @JsonIgnore
     private List<Rover> roverList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "map_id")
+    @JsonIgnore
     private List<Obstacle> obstacleList = new ArrayList<>();
 
     public Integer wrapX(Integer x) {
