@@ -61,7 +61,7 @@ Open the file `src/main/resources/application.properties` and update:
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/mars_rover_db
 spring.datasource.username=your_user // default "root"
-spring.datasource.password=your_password // default ""
+spring.datasource.password=your_password // default "root"
 ```
 
 Replace `your_user` and `your_password` with your real MySQL credentials.
